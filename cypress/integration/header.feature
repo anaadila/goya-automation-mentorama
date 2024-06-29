@@ -83,7 +83,7 @@ Feature: Header functionality
     When I click on the product in the cart
     Then I should be redirected to the "product" page
 
-  Scenario Outline: Changing the quantity of a product in the cart
+  Scenario Outline: Changing the quantity of a product in the cart for <quantity>
     Given I visit the home page
     When I add a product to the cart
     When I change the quantity of the product to <quantity>
@@ -118,3 +118,37 @@ Feature: Header functionality
     When I add a product to the cart
     When I click on the "cart" button
     Then I should be redirected to the "cart" page
+
+  Scenario: Access the Catalog page
+    Given I visit the home page
+    When I click on the "catalog" on the Header
+    Then I should be redirected to the "catalog" page
+
+  Scenario Outline: Access the category <category> on Catalog page
+    Given I visit the home page
+    When I select the category <category> by hovering the catalog
+    Then I should be redirected to the <category> page
+
+    Examples:
+      | category |
+      | "mulher" |
+      | "homem"  |
+      | "caixas-de-som" |
+
+  Scenario: Access the Catalog page via Menu
+    Given I visit the home page
+    When I click on the "menu" on the Header
+    When I click on the "catalog" button
+    Then I should be redirected to the "catalog" page
+
+  Scenario Outline: Access the category <category> on Catalog page via Menu
+    Given I visit the home page
+    When I click on the "menu" on the Header
+    When I click on the <category> button
+    Then I should be redirected to the <category> page
+
+    Examples:
+      | category |
+      | "mulher" |
+      | "homem"  |
+      | "caixas-de-som" |

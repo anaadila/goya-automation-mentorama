@@ -20,6 +20,14 @@ When('I click on the {string} button', (button) => {
     homePage.elements.checkoutButton().click();
   } else if (button == "cart") {
     homePage.elements.cartButton().click();
+  } else if (button == "catalog") {
+    homePage.elements.catalogMenu().click();
+  } else if (button == 'mulher') {
+    homePage.elements.menuMulher().click();
+  } else if (button == 'homem') {
+    homePage.elements.menuHomem().click();
+  } else if (button == 'caixas-de-som') {
+    homePage.elements.menuCaixa().click();
   }
   
 });
@@ -67,6 +75,19 @@ When('I remove the product from the cart', () => {
   homePage.elements.cartProductList().find('li').find('a[class*="remove_from_cart_button"]').click();
 });
 
+When('I select the category {string} by hovering the catalog', (category) => {
+  if (category == 'mulher') {
+    homePage.elements.catalog().trigger('mouseover');
+    homePage.elements.hoverMenuMulher().click({force: true});
+  } else if (category == 'homem') {
+    homePage.elements.catalog().trigger('mouseover');
+    homePage.elements.hoverMenuHomem().click({force: true});
+  } else if (category == 'caixas-de-som') {
+    homePage.elements.catalog().trigger('mouseover');
+    homePage.elements.hoverMenuCaixas().click({force: true});
+  }
+});
+
 Then('I should see the product removed from the cart', () => {
   homePage.elements.cartEmpty().should('be.visible');
 });
@@ -103,8 +124,15 @@ Then('I should be redirected to the {string} page', (page) => {
     cy.url().should('equal', 'https://shop.lm.mentorama.com.br/?page_id=17');
   } else if (page == 'cart') {
     cy.url().should('equal', 'https://shop.lm.mentorama.com.br/?page_id=16');
+  } else if (page == '"homem"') {
+    cy.url().should('equal', 'https://shop.lm.mentorama.com.br/?product_cat=homen');
+  } else if (page == '"mulher"') {
+    cy.url().should('equal', 'https://shop.lm.mentorama.com.br/?product_cat=mulher');
+  } else if (page == '"caixas-de-som"') {
+    cy.url().should('equal', 'https://shop.lm.mentorama.com.br/?product_cat=caixas-de-som');
+  } else if (page == 'catalog') {
+    cy.url().should('equal', 'https://shop.lm.mentorama.com.br/?post_type=product');
   }
-  
 });
 
 Then('I should see the Login modal', () => {

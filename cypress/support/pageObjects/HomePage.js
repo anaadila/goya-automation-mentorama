@@ -17,6 +17,10 @@ class HomePage {
             this.elements.wishlistIcon().click();
         } else if (opcao == 'cart') {
             this.elements.cartIcon().click();
+        } else if (opcao == 'catalog') {
+            this.elements.catalog().click();
+        } else if (opcao == 'menu') {
+            this.elements.menu().click();
         }
     }
 
@@ -71,6 +75,15 @@ class HomePage {
         freeShippingMessage: () => cy.get('div[class="progress-bar-message"]'),
         checkoutButton: () => cy.get('a[class*="checkout"]'),
         cartButton: () => cy.get('a[class="button wc-forward wp-element-button"]'),
+        catalog: () => cy.get('#menu-item-4084'),
+        hoverMenuMulher: () => cy.get('#menu-item-4087').find('a').first(),
+        hoverMenuHomem: () => cy.get('#menu-item-4085').find('a').first(),
+        hoverMenuCaixas: () => cy.get('#menu-item-4086').find('a').first(),
+        catalogMenu: () => cy.get('#menu-main-2').find('li').first().find('a').first(),
+        menuMulher: () => cy.get('li[class*="menu-item-4087"]').find('a').last(),
+        menuHomem: () => cy.get('li[class*="menu-item-4085"]').find('a').last(),
+        menuCaixa: () => cy.get('li[class*="menu-item-4086"]').find('a').last(),
+        menu: () => cy.get('button[class*="menu-toggle"]').first(),
     }
 
 }
