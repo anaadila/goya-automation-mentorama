@@ -13,6 +13,10 @@ class HomePage {
             this.elements.entrar().click();
         } else if (opcao == 'search') {
             this.elements.search().click();
+        } else if (opcao == 'wishlist') {
+            this.elements.wishlistIcon().click();
+        } else if (opcao == 'cart') {
+            this.elements.cartIcon().click();
         }
     }
 
@@ -37,6 +41,14 @@ class HomePage {
         this.elements.searchSelect().select(category);
     }
 
+    wishlistAProdut() {
+        this.elements.mainProducts().find('li').eq(0).find('a[class*="add_to_wishlist"]').click();
+    }
+
+    addAProductToCart() {
+        this.elements.mainProducts().find('li').eq(1).find('a[class*="add_to_cart_button"]').first().click();
+    }
+
     elements = {
         logo: () => cy.get("div[class='logo-holder']").first(),
         entrar: () => cy.get('span[class="icon-text"'),
@@ -47,6 +59,18 @@ class HomePage {
         search: () => cy.get('a[class*="quick_search"]'),
         searchInput: () => cy.get('#woocommerce-product-search-field-1'),
         searchSelect: () => cy.get('#product_cat-1'),
+        wishlistIcon: () => cy.get('a[class*="quick_wishlist"]'),
+        mainProducts: () => cy.get('ul[class*="et-main-products"]'),
+        withlistCount: () => cy.get('span[class*="et-wishlist-counter"]').invoke('text'),
+        cartIcon: () => cy.get('a[class*="quick_cart"]').first(),
+        cartNav: () => cy.get('#side-cart'),
+        cartCount: () => cy.get('span[class*="minicart-counter"]').invoke('text'),
+        cartX: () => cy.get('a[class*="et-close"]').first(),
+        cartProductList: () => cy.get('ul[class*="cart_list"]'),
+        cartEmpty: () => cy.get('div[class="et-cart-empty"]'),
+        freeShippingMessage: () => cy.get('div[class="progress-bar-message"]'),
+        checkoutButton: () => cy.get('a[class*="checkout"]'),
+        cartButton: () => cy.get('a[class="button wc-forward wp-element-button"]'),
     }
 
 }

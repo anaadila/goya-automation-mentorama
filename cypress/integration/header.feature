@@ -56,3 +56,65 @@ Feature: Header functionality
     When I click on the "search" on the Header
     When I search for ""
     Then I should see the search results in the "general" category
+  
+  Scenario: User access the Wishlist page
+    Given I visit the home page
+    When I click on the "wishlist" on the Header
+    Then I should be redirected to the "wishlist" page
+
+  Scenario: Wishlist header counter
+    Given I visit the home page
+    When I add a product to the wishlist
+    Then I should see the "wishlist" counter in the Header
+
+  Scenario: User access the Cart page
+    Given I visit the home page
+    When I click on the "cart" on the Header
+    Then I should see the Cart navbar
+
+  Scenario: Cart header counter
+    Given I visit the home page
+    When I add a product to the cart
+    Then I should see the "cart" counter in the Header
+
+  Scenario: Access product page through the cart
+    Given I visit the home page
+    When I add a product to the cart
+    When I click on the product in the cart
+    Then I should be redirected to the "product" page
+
+  Scenario Outline: Changing the quantity of a product in the cart
+    Given I visit the home page
+    When I add a product to the cart
+    When I change the quantity of the product to <quantity>
+    Then I should see the updated amount of the product in the cart
+
+    Examples:
+      | quantity |
+      | "more"     |
+      | "less"     |
+
+  Scenario: Remove product from cart
+    Given I visit the home page
+    When I add a product to the cart
+    When I remove the product from the cart
+    Then I should see the product removed from the cart
+
+  Scenario: Free shipping promotion
+    Given I visit the home page
+    When I add a product to the cart
+    Then I should see the free shipping promotion "not applied"
+    When I change the quantity of the product to "more"
+    Then I should see the free shipping promotion "applied"
+
+  Scenario: Access the Checkout page
+    Given I visit the home page
+    When I add a product to the cart
+    When I click on the "checkout" button
+    Then I should be redirected to the "checkout" page
+
+  Scenario: Access the Cart page
+    Given I visit the home page
+    When I add a product to the cart
+    When I click on the "cart" button
+    Then I should be redirected to the "cart" page
