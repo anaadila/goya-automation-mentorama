@@ -1,4 +1,7 @@
+import data from "../../fixtures/data.json";
+
 class HomePage {
+
     visit() {
         cy.visit('https://shop.lm.mentorama.com.br/');
     }
@@ -8,17 +11,30 @@ class HomePage {
             this.elements.logo().click();
         } else if (opcao == 'entrar') {
             this.elements.entrar().click();
+        } else if (opcao == 'search') {
+            this.elements.search().click();
         }
     }
 
     login(credentials) {
         if (credentials == 'not registered credentials') {
-            this.elements.loginModalEmail().type('not-registered@email.com', {force: true});
-            this.elements.loginModalPassword().type('123456', {force: true});
+            this.elements.loginModalEmail().type(data.emailNotRegistered, {force: true});
+            this.elements.loginModalPassword().type(data.password, {force: true});
             this.elements.loginModalSubmit().click();
         } else if (credentials == 'empty credentials') {
             this.elements.loginModalSubmit().click();
         }
+    }
+
+    search(product) {
+        if (product != "") {
+            this.elements.searchInput().type(product);
+        }
+        this.elements.searchInput().type('{enter}');
+    }
+
+    select(category) {
+        this.elements.searchSelect().select(category);
     }
 
     elements = {
@@ -28,19 +44,11 @@ class HomePage {
         loginModalEmail: () => cy.get('#username'),
         loginModalPassword: () => cy.get('#password'),
         loginModalSubmit: () => cy.get('button[name="login"]'),
+        search: () => cy.get('a[class*="quick_search"]'),
+        searchInput: () => cy.get('#woocommerce-product-search-field-1'),
+        searchSelect: () => cy.get('#product_cat-1'),
     }
 
-    /*fillUsername(name) {
-        cy.get('#username').type(name);
-    }
-
-    fillPassword(password) {
-        cy.get('#password').type(password);
-    }
-
-    submit() {
-        cy.get('#login-form').submit();
-    }*/
 }
 
 export default HomePage;
